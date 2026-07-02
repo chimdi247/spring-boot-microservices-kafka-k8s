@@ -6,11 +6,11 @@ WORKDIR /app
 COPY pom.xml .
 COPY api-gateway/pom.xml api-gateway/pom.xml
 WORKDIR /app/api-gateway
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B  -DdockerPassword=unused
 
 # Now bring in source and build
 COPY api-gateway/src ./src
-RUN mvn package -DskipTests
+RUN mvn package -DskipTests  -DdockerPassword=unused
 
 # ---- Runtime stage ----
 FROM eclipse-temurin:21-jre-alpine AS stage-1
