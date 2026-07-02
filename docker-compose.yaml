@@ -300,8 +300,8 @@ services:
     environment:
       - SPRING_MAIL_HOST=sandbox.smtp.mailtrap.io
       - SPRING_MAIL_PORT=2525
-      - SPRING_MAIL_USERNAME=${MAILTRAP_USERNAME}
-      - SPRING_MAIL_PASSWORD=${MAILTRAP_PASSWORD}
+      - SPRING_MAIL_USERNAME=3f2412dea3f253
+      - SPRING_MAIL_PASSWORD=915ebc15666e4b
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
       - SPRING_KAFKA_CONSUMER_PROPERTIES_SCHEMA_REGISTRY_URL=http://schema-registry:8081
       - LOKI_URL=http://loki:3100/loki/api/v1/push
