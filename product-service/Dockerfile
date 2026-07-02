@@ -4,10 +4,10 @@ WORKDIR /app
 COPY pom.xml .
 COPY product-service/pom.xml product-service/pom.xml
 WORKDIR /app/product-service
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B  -DdockerPassword=unused
 
 COPY product-service/src ./src
-RUN mvn package -DskipTests
+RUN mvn package -DskipTests  -DdockerPassword=unused
 
 FROM eclipse-temurin:21-jre-alpine AS stage-1
 WORKDIR /app

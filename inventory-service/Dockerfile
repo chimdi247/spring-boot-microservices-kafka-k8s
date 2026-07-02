@@ -4,10 +4,10 @@ WORKDIR /app
 COPY pom.xml .
 COPY inventory-service/pom.xml inventory-service/pom.xml
 WORKDIR /app/inventory-service
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B  -DdockerPassword=unused
 
 COPY inventory-service/src ./src
-RUN mvn package -DskipTests
+RUN mvn package -DskipTests  -DdockerPassword=unused
 
 FROM eclipse-temurin:21-jre-alpine AS stage-1
 WORKDIR /app
