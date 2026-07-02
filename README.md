@@ -1,6 +1,9 @@
 # Spring Boot Microservices
 This repository contains the latest source code of the spring-boot-microservices tutorial
 
+# keyclock requires https.   ngrok http 102.37.136.138:8181
+# https://playful-ritzy-defendant.ngrok-free.dev -> http://102.37.136.138:8181
+
 You can watch the tutorial on Youtube [here](https://youtu.be/yn_stY3HCr8?si=EjrBEUl0P-bzSWRG)
 
 ## Services Overview
@@ -65,7 +68,7 @@ Make sure you have the following installed on your machine:
 - Kind Cluster - https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 
 ### Start Kind Cluster
-    
+
 Run the k8s/kind/create-kind-cluster.sh script to create the kind Kubernetes cluster
 
 ```shell
