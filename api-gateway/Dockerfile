@@ -2,23 +2,24 @@
 FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Cache dependencies separately from source for faster rebuilds
+# Copy parent POM first - needed to resolve <parent> in the module POM
 COPY pom.xml .
+COPY api-gateway/pom.xml api-gateway/pom.xml
+WORKDIR /app/api-gateway
 RUN mvn dependency:go-offline -B
 
-COPY src ./src
-RUN mvn clean package -DskipTests -B
+# Now bring in source and build
+COPY api-gateway/src ./src
+RUN mvn package -DskipTests
 
 # ---- Runtime stage ----
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre-alpine AS stage-1
 WORKDIR /app
 
-# Run as non-root
 RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
+USER spring
 
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/api-gateway/target/*.jar app.jar
 
 EXPOSE 9000
-
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
